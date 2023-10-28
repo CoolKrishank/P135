@@ -1,32 +1,38 @@
-<!DOCTYPE html>
 <html>
 <head>
-  <title>AI Video Surveillance</title>
+
+	<title>AI Video Surveillance</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
+
   <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+  
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body background="mhmmm.jpg">
-  <center>
-    <h1 class="btn btn-info heading">AI Video Surveillance</h1>
-    <h3 class="btn btn-success">The input name which you provide should match the names present in the CoCo model for accurate detection.</h3>
-    <br><br>
-    <label>Object Name:</label>
-    <br>
-    <input type="text" id="objectName"> <!-- Added an id for referencing -->
-    <br><br>
-    <button id="start" onclick="startObjectDetection()" class="btn btn-success">Start</button> <!-- Added "id" and updated the "onclick" function -->
-    <br><br>
-    <h3 id="number_of_objects_detected" class="btn btn-warning"></h3>
-    <h3 id="status" class="btn btn-danger"></h3>
-  </center>
-  <div id="copy_right_footer">
-    Developed By - Krishank
-  </div>
-  <script src="main.js"></script> <!-- Include your JavaScript file -->
+<center>
+   <h1 class="btn btn-info heading">AI Video Surveillance</h1>
+   <h3 class="btn btn-success">The input name which you will give should match the names present in CoCo model then only it will detect.</h3>
+   <br><br>
+   <label>Object Name:</label>
+   <br>
+   <input type="text">
+   <br><br>
+   <button id="start" onclick="start()" class="btn btn-success">Start</button>
+   <br><br>
+   <h3 id="number_of_objects_detected" class="btn btn-warning"></h3>
+   <h3 id="status" class="btn btn-danger"></h3>
+</center>
+<div id="copy_right_footer">
+  Developed By - Krishank
+</div>
+<script src="main.js"></script>
+
 </body>
+
 </html>
