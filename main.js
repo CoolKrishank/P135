@@ -1,53 +1,52 @@
-objects = [];
-objectDetector = "";
-status = "";
-video = "";
-function setup()
-{
-    canvas = createCanvas(480 , 380);
-    canvas.center();
-    video = createCapture(VIDEO);
-    video.size(480,380);
-    video.hide();
-    objectDetector = ml5.objectDetector('cocossd' , modelLoaded);
-    document.getElementById("status").innerHTML = "Status : Detecting Object";
-}
-function draw()
-{
-    image(video , 0 , 0 , 480 , 380);
-    if (status !="")
-    {
-        objectDetector.detect(video , gotResult);
-        for(var i=0; i < objects.length ; i++)
-        {
-            document.getElementById("status").innerHTML = "Status : Person Detected";
-            document.getElementById("number_of_objects_detected").innerHTML = "Number of objects detected are : "+ objects.length;
+let objectDetector;
+let status = "Initializing";
+let video;
+let objects = [];
 
-            fill("#00E4FF");
-            percent = floor(objects[i].confidence * 100);
-            text(objects[i].label + " " + percent + "%" , objects[i].x + 15 , objects[i].y + 15 );
-            noFill();
-            stroke("#00E4FF");
-            rect(objects[i].x , objects[i].y , objects[i].width , objects[i].height);
-        }
-    }
+function setup() {
+  createCanvas(480, 380);
+  video = createCapture(VIDEO);
+  video.size(480, 380);
+  video.hide();
+  objectDetector = ml5.objectDetector('cocossd', modelLoaded);
+  document.getElementById("status").innerHTML = "Status: " + status;
 }
-function gotResult(error , results)
-{
-    if(error)
-    {
-        console.log(error);
-    }
-    console.log(results);
+
+function draw() {
+  image(video, 0, 0, 480, 380);
+  if (status === "Object Detection in Progress") {
+    objectDetector.detect(video, gotResult);
+  }
+
+  for (let i = 0; i < objects.length; i++) {
+    fill("#00E4FF");
+    let percent = nf(objects[i].confidence * 100, 2, 2);
+    text(objects[i].label + " " + percent + "%", objects[i].x + 10, objects[i].y + 15);
+    noFill();
+    stroke("#00E4FF");
+    rect(objects[i].x, objects[i].y, objects[i].width, objects[i].height);
+  }
+
+  // Update status and number of objects detected outside the loop
+  document.getElementById("status").innerHTML = "Status: " + status;
+  document.getElementById("number_of_objects_detected").innerHTML = "Number of objects detected: " + objects.length;
+}
+
+function gotResult(error, results) {
+  if (error) {
+    console.error(error);
+    status = "Error: Object Detection Failed";
+  } else {
     objects = results;
+    status = "Object Detected";
+  }
 }
-function start()
-{
-    objectDetector = ml5.objectDetector('cocossd', modelLoaded);
-    document.getElementById("status").innerHTML = "Status : Objects Detected";
+
+function startObjectDetection() {
+  status = "Object Detection in Progress";
 }
-function modelLoaded()
-{
-    console.log("Model Loaded!");
-    status = true;
+
+function modelLoaded() {
+  console.log("Model Loaded!");
+  status = "Model Loaded";
 }
