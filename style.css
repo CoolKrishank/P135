@@ -11,6 +11,7 @@ body
 #start , #number_of_objects_detected , #status
 {
     font-size: 18px;
+    margin-top: 20px;
 }
 #copy_right_footer
 {
