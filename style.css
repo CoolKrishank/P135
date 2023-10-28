@@ -8,10 +8,9 @@ body
     width: 100%;
     margin: 0%;
 }
-#start , #number_of_objects_detected , #status
+#number_of_objects_detected , #status
 {
     font-size: 18px;
-    margin-top: 20px;
 }
 #copy_right_footer
 {
